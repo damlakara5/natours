@@ -61,7 +61,7 @@ app.use(hpp({
     whitelist: ['duration', 'ratingsAverage', 'ratingsQuantity', 'maxGroupSize', 'difficulty', 'price'] // allow duplication for this field
 }))
 
-
+app.use(cors())
 app.use(compression())
 
 //app.use(express.static(`${__dirname}/public`))  //build in express middleware for we can get access to the static files from browser ( like images, html)
