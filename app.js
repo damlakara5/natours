@@ -8,6 +8,7 @@ const xss = require("xss-clean")
 const hpp = require("hpp")
 const cookieParser = require("cookie-parser")
 const compression = require("compression")
+const cors = require("cors")
 
 const tourRouter = require("./routes/tourRoutes")
 const userRouter = require("./routes/userRoutes")
