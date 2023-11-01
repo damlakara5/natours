@@ -1,5 +1,5 @@
 const catchAsync = require("./../utils/catchAsync")
-const AppError = require("./../utils/AppError")
+const AppError = require("./../utils/appError")
 const APIFeatures = require("./../utils/apiFeatures")
 
 //factory function is a function that returns another function (controller in this case)
