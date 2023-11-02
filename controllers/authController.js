@@ -24,6 +24,7 @@ const createSendToken = (user,statusCode,req, res) => {
     secure: req.secure
   }
  
+  console.log(res)
   res.cookie('jwt', token, cookieOptions)
   //remove password from output
   user.password = undefined
@@ -69,7 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
     }
   
     // 3) If everything ok, send token to client
-    createSendToken(user, 200, res)
+    createSendToken(user, 200, req,res)
 
   });
 
