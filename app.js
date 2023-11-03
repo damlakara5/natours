@@ -32,7 +32,8 @@ app.set('views', path.join(__dirname, 'views') )
 // 1)GLOBAL Middlewares
 app.use(express.static(path.join(__dirname,`public`))) 
 app.use(helmet())
-app.enable('trust proxy')
+app.set('trust proxy', true);
+
 if(process.env.NODE_ENV === "development"){
     app.use(morgan('dev'))
 }

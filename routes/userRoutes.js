@@ -6,6 +6,7 @@ const authController = require("../controllers/authController")
 const router = express.Router()
 
 //same as below but with Router
+router.use("/:userId/reviews", reviewRouter)
 
 router.post("/signup", authController.signup)
 router.post("/login", authController.login)
