@@ -91,8 +91,11 @@ exports.login = catchAsync(async (req, res, next) => {
       req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
     ) {
+      console.log("hhhhhh")
       token = req.headers.authorization.split(' ')[1];
+      console.log(token)
     }else if(req.cookies.jwt){
+
       token = req.cookies.jwt 
     }
   
