@@ -145,8 +145,9 @@ exports.createOne = Model => catchAsync(async (req,res,next) => {
   if (req.params.tourId) filter = { tour: req.params.tourId }
   if (req.params.userId) filter = { user: req.params.userId }
 
+
   //execute query
-      const features = new APIFeatures(Model.find(), req.query).filter().sort().limitFields().paginate()
+      const features = new APIFeatures(Model.find(filter), req.query).filter().sort().limitFields().paginate()
       const doc = await features.query
 
       res.status(200).json({
