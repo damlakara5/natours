@@ -53,7 +53,7 @@ reviewSchema.pre(/^find/, function(next){
         select : 'name photo'  //fields that we  want to show
     }).populate({
         path: "tour",
-        select: "name ratingsAverage"
+        select: "name ratingsAverage imageCover"
     }) 
     next()
 })
