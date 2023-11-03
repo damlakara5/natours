@@ -51,6 +51,9 @@ reviewSchema.pre(/^find/, function(next){
     this.populate({
         path:'user', //name of the field we want to replace
         select : 'name photo'  //fields that we  want to show
+    }).populate({
+        path: "tour",
+        select: "name ratingsAverage"
     }) 
     next()
 })
@@ -71,8 +74,6 @@ reviewSchema.statics.calcAverageRatings = async function(tourId){
         }
     ])
 
-
-    console.log(stats)
 
     if(stats.length > 0){
         await Tour.findByIdAndUpdate(tourId, {
