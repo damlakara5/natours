@@ -37,7 +37,10 @@ const session = await stripe.checkout.sessions.create({
 })
 
     //Send to client
-    res.redirect(303, session.url);
+    res.status(200).json({
+        status: 'success',
+        session: session.id  // Send only the session ID, not the whole session object
+    });
 })
 
 
