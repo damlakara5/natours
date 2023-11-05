@@ -28,6 +28,8 @@ exports.updateOne = Model => catchAsync( async (req,res,next) => {
         runValidators: true
     })
 
+    console.log("req body",req.body )
+
     if(!doc) {
         return next(new AppError('No doc found with that ID', 404))
      }
