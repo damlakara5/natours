@@ -7,21 +7,20 @@ const viewsController = require("../controllers/viewsController")
 const router = express.Router() 
 
 router.get('/checkout-session/:tourId', authController.protect, bookingController.getCheckoutSession)
+router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
-router.use(authController.restrictTo('admin', 'lead-guide'));
 
 router
   .route('/')
-  .get(bookingController.getAllBookings)
-  .post(bookingController.createBooking);
+  .get(authController.protect,authController.restrictTo('admin', 'lead-guide'),bookingController.getAllBookings)
+  .post(authController.protect,authController.restrictTo('admin', 'lead-guide'),bookingController.createBooking);
 
 router
   .route('/:id')
-  .get(bookingController.getBooking)
-  .patch(bookingController.updateBooking)
-  .delete(bookingController.deleteBooking);
+  .get(authController.protect,authController.restrictTo('admin', 'lead-guide'),bookingController.getBooking)
+  .patch(authController.protect,authController.restrictTo('admin', 'lead-guide'),bookingController.updateBooking)
+  .delete(authController.protect,authController.restrictTo('admin', 'lead-guide'),bookingController.deleteBooking);
   
-router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
 
 module.exports = router
