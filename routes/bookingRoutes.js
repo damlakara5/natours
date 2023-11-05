@@ -19,5 +19,8 @@ router
   .get(bookingController.getBooking)
   .patch(bookingController.updateBooking)
   .delete(bookingController.deleteBooking);
+  
+router.get('/my-tours', authController.protect, viewsController.getMyTours);
+
 
 module.exports = router
