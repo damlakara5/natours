@@ -6,8 +6,11 @@ const viewsController = require("../controllers/viewsController")
 
 const router = express.Router() 
 
+
+// ... other middlewares and routes
+
 router.get('/checkout-session/:tourId', authController.protect, bookingController.getCheckoutSession)
-router.get('/my-tours',bookingController.createBookingCheckout, authController.protect,  viewsController.getMyTours);
+router.get('/my-tours', bookingController.check, bookingController.createBookingCheckout, authController.protect,  viewsController.getMyTours);
 
 
 router
