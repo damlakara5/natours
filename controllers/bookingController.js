@@ -48,6 +48,7 @@ const session = await stripe.checkout.sessions.create({
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
     // This is only TEMPORARY, because it's UNSECURE: everyone can make bookings without paying
+    console.log(req.query)
     const { tour, user, price } = req.query;
     console.log("create booking checkout")
    console.log("Tour", tour)
