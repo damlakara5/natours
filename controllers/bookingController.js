@@ -10,6 +10,8 @@ exports.getCheckoutSession = catchAsync( async(req,res,next) => {
 //Get the currently booked tour
 
 const tour = await Tour.findById(req.params.tourId)
+
+console.log(tour)
 //create checkout session
 
 const session = await stripe.checkout.sessions.create({
@@ -47,8 +49,11 @@ const session = await stripe.checkout.sessions.create({
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
     // This is only TEMPORARY, because it's UNSECURE: everyone can make bookings without paying
     const { tour, user, price } = req.query;
-   
-    if (!tour && !user && !price) return next();
+    console.log("create booking checkout")
+   console.log("Tour", tour)
+   console.log("User", user)
+
+   if (!tour && !user && !price) return next();
     await Booking.create({ tour, user, price });
   
     res.redirect(req.originalUrl.split('?')[0]);
