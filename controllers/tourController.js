@@ -254,29 +254,3 @@ exports.getDistances = catchAsync( async (req,res,next) => {
 })
 
 
-exports.setFav = catchAsync( async (req, res, next) => {
-    const {tourId} = req.params
-
-    const tour = await Tour.findByIdAndUpdate(tourId,{ isFav: true },{
-            new: true,
-            runValidators: true
-        })
-
-    res.status(200).json({
-        status: "success",
-        tour
-    })
-})
-exports.getFav = catchAsync( async (req, res, next) => {
-    const userId = req.user._id;
-
-    const favoriteTours = await Tour.find({ isFav: true, user: userId });
-
-    res.status(200).json({
-        status: "success",
-        results: favoriteTours.length,
-        data: {
-            tours: favoriteTours
-        }
-    })
-})
