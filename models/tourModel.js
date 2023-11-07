@@ -61,6 +61,11 @@ const tourSchema = new mongoose.Schema({
         trim: true,
         required : [true,"A tour must have a summary"]
     },
+    isFav : {
+        type: Boolean,
+        default: false
+
+    },
     description: {
         type: String,
         trim: true

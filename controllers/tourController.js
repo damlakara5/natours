@@ -94,8 +94,6 @@ exports.getAllTours = factory.getAll(Tour)
 
 exports.getTour = factory.getOne(Tour, {path: 'reviews'})
 
-
-
 exports.createTour = factory.createOne(Tour)
 
 
@@ -251,6 +249,33 @@ exports.getDistances = catchAsync( async (req,res,next) => {
         status: 'success',
         data : {
             data: distances
+        }
+    })
+})
+
+
+exports.setFav = catchAsync( async (req, res, next) => {
+    const {tourId} = req.params
+
+    const tour = await Tour.findByIdAndUpdate(tourId,{ isFav: true },{
+            new: true,
+            runValidators: true
+        })
+
+    res.status(200).json({
+        status: "success",
+        tour
+    })
+})
+exports.getFav = catchAsync( async (req, res, next) => {
+    const favoriteTours = await Tour.find({ isFav: true });
+
+
+    res.status(200).json({
+        status: "success",
+        results: favoriteTours.length,
+        data: {
+            tours: favoriteTours
         }
     })
 })
