@@ -268,9 +268,11 @@ exports.setFav = catchAsync( async (req, res, next) => {
     })
 })
 exports.getFav = catchAsync( async (req, res, next) => {
-    const favoriteTours = await Tour.find({ isFav: true });
+    const userId = req.user.id;
 
+    const favoriteTours = await Tour.find({ isFav: true, user: userId });
 
+    console.log(req.user._id)
     res.status(200).json({
         status: "success",
         results: favoriteTours.length,
