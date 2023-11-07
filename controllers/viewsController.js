@@ -58,6 +58,7 @@ exports.getMyTours = catchAsync( async  (req,res) => {
   const tours = await Tour.find({_id: { $in: tourIDs }})
     res.status(200).json({
       status: "success",
+      results: tours.length,
       tours
     })
 
