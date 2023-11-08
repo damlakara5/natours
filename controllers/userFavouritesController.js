@@ -3,23 +3,35 @@ const catchAsync = require("./../utils/catchAsync")
 
 
 exports.setFav = catchAsync( async (req, res, next) => {
-    console.log(req.user)
     const userId = req.user._id;
     const tourId = req.params.tourId;
 
-    // Check if the tour is already favorited by the user to prevent duplicates
+    // Check if the tour is already favorited by the user
     const existingFavorite = await UserFavorite.findOne({ user: userId, tour: tourId });
-    if (existingFavorite) {
-        return res.status(400).json({ status: 'fail', message: 'Tour is already set as favorite' });
-      }
-    const newFavorite = await UserFavorite.create({ tour: tourId, user: userId });
 
-    res.status(201).json({
-        status: 'success',
-        data: {
-          favorite: newFavorite
-        }
-      });
+    // If it exists, remove it from favorites
+    if (existingFavorite) {
+        await UserFavorite.deleteOne({ _id: existingFavorite._id });
+        return res.status(201).json({ 
+            status: 'success', 
+            message: 'Tour has been removed from favorites' 
+        });
+    } else {
+        // If it's not favorited yet, add it to favorites
+        const newFavorite = new UserFavorite({
+            user: userId,
+            tour: tourId
+        });
+        await newFavorite.save();
+        return res.status(200).json({ 
+            status: 'success', 
+            message: 'Tour has been added to favorites' 
+        });
+    }
+
+
+
+    
 })
 exports.getFav = catchAsync( async (req, res, next) => {
     const userId = req.user._id;
