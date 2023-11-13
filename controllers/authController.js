@@ -96,6 +96,8 @@ exports.login = catchAsync(async (req, res, next) => {
 
       token = req.cookies.jwt 
     }
+
+    console.log("Token ⛔", token)
   
     if (!token) {
       return next(
