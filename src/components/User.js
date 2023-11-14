@@ -1,7 +1,11 @@
 import React, { useEffect,  useState } from 'react'
 import { useUser } from '../context/userContext'
-import { NavLink } from 'react-router-dom'
+import { Form, NavLink } from 'react-router-dom'
 import {BsGear, BsHandbag, BsStar, BsCurrencyDollar} from "react-icons/bs"
+import Sidebar from './ui/Sidebar'
+import Main from './ui/Main'
+import GreenButton from './ui/GreenButton'
+import FormGroup from './ui/FormGroup'
 
 const User = () => {
     const {user, setUser} = useUser()
@@ -76,61 +80,23 @@ const User = () => {
     if(!user) return <p>Please log in</p>
 
   return (
-        <main class="main py-20 md:px-16">
-            <div class="user-view">
-                <nav class="user-view__menu md:w-96 w-32">
-                    <ul class="side-nav">
-                        <li class="side-nav--active"> 
-                            <NavLink className="md:px-10 py-3 px-2 md:text-3xl text-sm text-start" href="#"> <BsGear />Settings</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="md:px-10 py-3 px-2 md:text-3xl text-sm text-start" href="/my-tours"> <BsHandbag /> My bookings</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="md:px-10 py-3 px-2 md:text-3xl text-sm text-start" to="/myReviews"> <BsStar/> My reviews</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="md:px-10 py-3 px-2 md:text-3xl text-sm text-start" href="#"> <BsCurrencyDollar /> Billing </NavLink>
-                        </li>
-                    </ul>
-                    {
-                        user.role === 'admin' &&
-                        <div clas="admin_nav">
-                            <h5 class="admin-nav__heading">Admin</h5>
-                            <ul class="side-nav">
-                                    <li class="side-nav--active"> 
-                                    <NavLink href="#">Manage tours</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink href="/my-tours">Manage users</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink href="#">Manage reviews</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink href="#">Manage bookings</NavLink>
-                                </li>
-                            </ul>
-                        </div>
-                    }
-                </nav>
-                <div class="user-view__content">
+        <Main >
+            <Sidebar active="Settings" />
+            <div class="user-view__content">
                     <div class="user-view__form-container md:px-20 px-10">
                         <h2 class="heading-secondary ma-bt-md">Your account settings</h2>
                         <form class="form form-user-data"  onSubmit={handleSubmit}>
-                            <div class="form__group">
-                                <label class="form__label" for="name">Name</label>
-                                <input class="form__input"  id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required="required" name="name" /></div>
-                            <div class="form__group ma-bt-md">
-                                <label class="form__label" for="email">Email address</label>
-                                <input class="form__input"  id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required="required" name="email" /></div>
+                            
+                            <FormGroup  label="Name" handleChange={setName} inputType="text" name="name" value={name}  />
+                            <FormGroup  label="Email Address" handleChange={setEmail} inputType="email" name="email" value={email}  />
+                            
                             <div class="form__group form__photo-upload">
                                 <img class="form__user-photo" src={`https://natours-e3yq.onrender.com/img/users/${user.photo}`} alt="User" />
                                 <input class="form__upload" type="file" accept="image/*" id="photo" name="photo" onChange={handleFileChange}/>
                                 <label for="photo">Choose new photo</label>
                             </div>
                             <div class="form__group right">
-                                <button class="btn btn--small btn--green" type='submit'>Save settings</button>
+                                <GreenButton label="Save settings" />
                             </div>
                         </form>
                     </div>
@@ -138,25 +104,18 @@ const User = () => {
                     <div class="user-view__form-container md:px-20 px-10">
                         <h2 class="heading-secondary ma-bt-md">Password change</h2>
                         <form class="form form-user-password" onSubmit={handlePasswordChange}>
-                            <div class="form__group">
-                                <label class="form__label" for="password-current">Current password</label>
-                                <input class="form__input" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}  id="password-current" type="password" placeholder="••••••••" required="required" minKLength="8" />
-                            </div>
-                            <div class="form__group">
-                                <label class="form__label" for="password">New password</label>
-                                <input class="form__input" value={password} onChange={(e) => setPassword(e.target.value)}  id="password" type="password" placeholder="••••••••" required="required" minLength="8" /></div>
-                            <div class="form__group ma-bt-lg">
-                                <label class="form__label" for="password-confirm">Confirm password</label>
-                                <input class="form__input" value={passwordConfirm} onChange={(e) => setConfirmPassword(e.target.value)}  id="password-confirm" type="password" placeholder="••••••••" required="required" minLength="8" />
-                            </div>
+                          
+                            <FormGroup  label="Current password" handleChange={setCurrentPassword} inputType="password" name="password-current" value={currentPassword} placeholder="••••••••" minLength="8"  />
+                            <FormGroup  label="New password" handleChange={setPassword} inputType="password" name="password" value={password} placeholder="••••••••" minLength="8"  />
+                            <FormGroup  label="Confirm password" handleChange={setConfirmPassword} inputType="password" name="password" value={passwordConfirm} placeholder="••••••••" minLength="8"  />
+
                             <div class="form__group right">
-                                <button class="btn btn--small btn--green btn--save-password">Save password</button>
+                                <GreenButton  label="Save password" />
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
-        </main>
+        </Main>
   )
 }
 

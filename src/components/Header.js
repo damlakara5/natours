@@ -1,11 +1,10 @@
-import { NavLink, useNavigate,} from "react-router-dom"
+import { NavLink} from "react-router-dom"
 
 import logo from "../assets/logo-white.png"
 import { useUser } from "../context/userContext";
 import { useEffect } from "react";
 const Header = () => {
     const { user , setUser} = useUser();
-    const navigate = useNavigate()
 
     const logout = () => {
         localStorage.removeItem("userData")
@@ -13,7 +12,7 @@ const Header = () => {
 
         setUser(null);
 
-        navigate("/login")
+        window.location ="/"
     }
 
     useEffect(() => {}, [user])
@@ -27,12 +26,13 @@ const Header = () => {
         <div className="header__logo">
             <img src={logo} alt="Natours logo"/>
         </div>
-        <nav className="nav nav--user me-4">
+        <nav className="nav nav--user items-center me-4">
             {
                 user && 
                 <>
-                    <NavLink className="nav__el nav__el--logout" onClick={logout}>Logout</NavLink>
-                    <NavLink className="nav__el" to="/me">
+                    <NavLink className="nav__el nav__el--logout mb-0 " to="/favs"  >Favs</NavLink>
+                    <NavLink className="nav__el nav__el--logout ms-2 mb-0" onClick={logout}>Logout</NavLink>
+                    <NavLink className="nav__el ms-2" to="/me">
                         <img className="nav__user-img" src={`https://natours-e3yq.onrender.com/img/users/${user.photo}`} alt={user.name}/>
                         <span>{user.name} </span>
                     </NavLink>
@@ -41,8 +41,8 @@ const Header = () => {
             {
                 !user &&
                 <>
-                    <NavLink className="nav__el" to="/login">Login</NavLink>
-                    <NavLink className="nav__el nav__el--cta">Sign Up</NavLink>
+                    <NavLink className="nav__el " to="/login">Login</NavLink>
+                    <NavLink className="nav__el nav__el--cta" to="/signup">Sign Up</NavLink>
                 </>
             }
         </nav>

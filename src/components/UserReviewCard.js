@@ -1,8 +1,8 @@
 import {BsStarFill, BsStar, BsPencilSquare, BsFillTrash3Fill} from "react-icons/bs"
 import Loading from "./Loading"
-import { toast } from "react-toastify"
-import React, {  useState, useEffect } from 'react'
+import React, {  useState } from 'react'
 import Star from "./Star"
+import { useReviews } from "../hooks/useReviews"
 
 function UserReviewCard({review}) {
 
@@ -10,26 +10,14 @@ function UserReviewCard({review}) {
     const [editedReview, setEditedReview] = useState(review.review)
     const [rating, setRating] = useState(0)
     const [hover, setHover] = useState(0);
-
+    const {editReview, deleteReview} = useReviews(review.id)
     
 
     if(!review) return <Loading ></Loading>
 
     const handleReviewDelete = async() => {
+        deleteReview({id: review.id})
         
-        const res = await fetch(`https://natours-e3yq.onrender.com/api/v1/reviews/${review.id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
-            },
-        })
-
-        const message = await res
-        if(message.ok){
-            toast.success("Review successfully deleted!")
-        }else{
-            toast.error("Something went wrong. Please try again!")
-        }
     }
 
     const handleEditReview = async() => {
@@ -37,40 +25,27 @@ function UserReviewCard({review}) {
             rating,
             review: editedReview
         }
-        const res = await fetch(`https://natours-e3yq.onrender.com/api/v1/reviews/${review.id}`, {
-                method:"PATCH",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("jwt")}`
-                },
-                body: JSON.stringify(reqData)
-            })
-    
-            const data = await res.json()
-            console.log(data)
+        setIsEditing(cur => !cur)
+        editReview({ id: review.id, reqData });
     }
   
-
-    const handleMouseEnter = (i) => {
-        console.log(`Mouse enter on star ${i}`);
-        setHover(i);
-    };
     
 
 
     return (
-        <div className='card relative rounded-md'>
+        <div className='relative rounded-md'>
             <div className='card__header'>
                 <div className='card__picture h-32'>
                     <div className='card__picture-overlay'>
                         &nbsp;
                         <img className="card__picture-img" src={`https://natours-e3yq.onrender.com/img/tours/${review.tour?.imageCover}`} alt={review.tour?.name}/>
                     </div>
-                    </div>
+                </div>
                 </div>
                 <h3 className="heading-tertirary text-left h-6	 top-0 left-0"><span> {review.tour?.name} </span></h3>
 
                 <div className="card__footer flex justify-between items-center">
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start flex-1">
                        {
                         !isEditing && 
                         <>
@@ -85,14 +60,14 @@ function UserReviewCard({review}) {
                        {
                         isEditing && 
                         <>
-                            <textarea value={editedReview}  onChange={(e) =>setEditedReview(e.target.value)} />
+                            <textarea className="w-full border-2 outline-none p-3 rounded-md" value={editedReview}  onChange={(e) =>setEditedReview(e.target.value)} />
                             <div className="reviews__rating flex items-start mt-3" role='button'> 
                                 {
                                      [1,2,3,4,5].map((item) =>
                                      <Star
                                         key={item}
                                         filled={item < (hover || rating)}
-                                        onMouseEnter={() => handleMouseEnter(item + 1)}
+                                        onMouseEnter={() => setHover(item + 1)}
                                         onMouseLeave={() => setHover(rating)}
                                         onClick={() => setRating(item + 1)}
                                         />
@@ -101,13 +76,13 @@ function UserReviewCard({review}) {
                                     
                                 
                             </div>
-                            <button onClick={handleEditReview}>Edit</button>
+                            <button className="mt-4 border-green-600 border-2 px-2 rounded-md font-bold uppercase" onClick={handleEditReview}>Save</button>
                         </>
                        }
 
                     </div>
                    
-                    <div className="flex text-3xl gap-4">
+                    <div className="flex text-3xl gap-4 ms-4">
                         <button onClick={() => setIsEditing((cur) => !cur)}  className="text-sky-800"><BsPencilSquare /></button> 
                         <button onClick={handleReviewDelete}  className="text-red-600"><BsFillTrash3Fill /></button> 
                     </div>

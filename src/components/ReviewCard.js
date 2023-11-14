@@ -1,7 +1,7 @@
 import {BsStarFill, BsStar} from "react-icons/bs"
 
 function ReviewCard({review}) {
-    console.log(review)
+
     return (
             <div className="reviews__card">
 

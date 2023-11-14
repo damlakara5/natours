@@ -2,7 +2,7 @@ import { Oval } from "react-loader-spinner"
 
 function Loading() {
     return (
-        <div className="loader-container">
+        <div className="loader-container flex items-center justify-center h-screen">
             <Oval
                 height={80}
                 width={80}

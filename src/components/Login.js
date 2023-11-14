@@ -1,14 +1,11 @@
 import React, { useRef } from 'react'
 import Header from './Header'
-import { useNavigate } from 'react-router-dom'
-import { useUser } from '../context/userContext'
-import { toast } from 'react-toastify'
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const navigate = useNavigate()
-    const { setUser } = useUser();
+    const {login} = useAuth()
 
 
     const handleSubmit = async(e) => {
@@ -17,25 +14,9 @@ const Login = () => {
             email : emailRef.current.value,
             password : passwordRef.current.value
         }
-        const res = await fetch("https://natours-e3yq.onrender.com/api/v1/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(reqData)
-        })
 
-        const data = await res.json()
-
-        if(res.status === 200){
-            localStorage.setItem("jwt", data.token)
-            localStorage.setItem('userData', JSON.stringify(data.data.user));
-            setUser(data.data.user)
-            navigate("/")
-       }
-       if(res.status === 401){
-         toast.error("Incorrect email or password")
-       }
+        login(reqData)
+       
     }
 
   return (
