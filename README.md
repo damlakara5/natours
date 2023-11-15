@@ -48,6 +48,7 @@ Users should be able to:
 - Mongoose
 - Context API
 - Stripe
+- Tailwind CSS
 
 
 
