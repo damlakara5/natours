@@ -48,9 +48,7 @@ exports.createOne = Model => catchAsync(async (req,res,next) => {
     //  const newTour = new Tour()
     //  newTour.save()
 
-    console.log("REQ BODY",req.body)
     const newDoc = await Model.create(req.body)
-    console.log(newDoc)
   
     res.status(201).json({
         status: "success",
