@@ -77,7 +77,7 @@ const AllTour = () => {
        
     if(allToursLoading || topFiveIsLoading) return <Loading />
     return (
-        <div>
+        <div className='px-5'>
             <div className='sm:flex gap-4 mt-5 text-3xl items-center '>
                 <div className='text-2xl flex sm:flex-row flex-col gap-3 items-center '>
                     <p >Get Tours Within</p>

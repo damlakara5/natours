@@ -30,16 +30,16 @@ function Billing() {
                     <ul>
                         {
                             bookings?.tours.map(tour => (
-                                <li className="text-4xl flex flex-col mb-24 px-6 shadow-lg rounded-md hover:shadow-xl  "> 
+                                <li className="sm:text-4xl text-xl flex flex-col mb-24 px-6 shadow-lg rounded-md hover:shadow-xl  "> 
                                     <div className="flex justify-between items-center">
                                         <div>
                                             <div className="flex items-center gap-5">
-                                                <img className="rounded-full w-24 h-24"  src={`https://natours-e3yq.onrender.com/img/tours/${tour.images[0]}`} alt="Tour" />
+                                                <img className="rounded-full sm:w-24 sm:h-24 w-12 h-12"  src={`https://natours-e3yq.onrender.com/img/tours/${tour.images[0]}`} alt="Tour" />
                                                 <p>{tour.name}</p>
                                             </div>
-                                            <p className="flex text-2xl items-center mt-5 gap-4"> <BsCalendar2Date className="reviews__star reviews__star--active " /> { new Date(tour.createdAt).toLocaleString('en-US', options).replace(',', '').replace(/:\d+ /, '.')} </p>
+                                            <p className="flex sm:text-2xl text-lg items-center mt-5 gap-4"> <BsCalendar2Date className="reviews__star reviews__star--active " /> { new Date(tour.createdAt).toLocaleString('en-US', options).replace(',', '').replace(/:\d+ /, '.')} </p>
                                         </div>
-                                        <p> {tour.price}$ </p>
+                                        <p className=""> {tour.price}$ </p>
 
                    {/*                      <div className="flex flex-col items-end">
                                             <p className="flex items-top text-3xl ">  <BsStarFill className="reviews__star reviews__star--active me-3" /> {tour.ratingsAverage}</p>
@@ -55,7 +55,7 @@ function Billing() {
                             ))
                         }
                     </ul>
-                    <div className="flex justify-between text-4xl pt-5 mt-14 font-semibold">
+                    <div className="flex justify-between text-start sm:text-4xl text-2xl pt-5 mt-14 font-semibold">
                         <p>TOTAL EXPENDITURE</p>
                         <p> {totalPrice} $ </p>
                     </div>

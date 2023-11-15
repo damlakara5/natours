@@ -10,10 +10,10 @@ function Sidebar({active}) {
     return (
         <nav className="user-view__menu md:w-96 w-32">
                     <ul className="side-nav">
-                        <NavItem active={active} to="/me" label="Settings" icon={<BsGear />}  />
-                        <NavItem active={active} to="/my-bookings" label="My Bookings" icon={<BsHandbag />}  />
-                        <NavItem active={active} to="/myReviews" label="My Reviews" icon={<BsStar/>}  />
-                        <NavItem active={active} to="/billing" label="Billing" icon={<BsCurrencyDollar />}  />  
+                        <NavItem active={active} to="/me" label="Settings" icon={<BsGear className="me-3 w-5 md:w-14" />}  />
+                        <NavItem active={active} to="/my-bookings" label="My Bookings" icon={<BsHandbag className="me-3 w-5 md:w-14" />}  />
+                        <NavItem active={active} to="/myReviews" label="My Reviews" icon={<BsStar  className="me-3 w-5 md:w-14"/>}  />
+                        <NavItem active={active} to="/billing" label="Billing" icon={<BsCurrencyDollar className="me-3 w-5 md:w-14" />}  />  
                     </ul>
                     {
                         user.role === 'admin' &&

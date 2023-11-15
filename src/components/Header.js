@@ -48,9 +48,9 @@ const Header = () => {
             }
         </nav>
     </header>
-    <header className="header-auth text-2xl ps-10" style={{backgroundColor: "#fef9c3"}} >
+    <header className="header-auth sm:text-2xl ps-5 sm:ps-10 sm:h-12 sm:flex-row flex-col text-start sm:items-center items-start" style={{backgroundColor: "#fef9c3"}} >
          <p>  This website was developed by <span className="font-bold">Damla Kara</span> .</p>
-         <p className="pe-10">
+         <p className="pe-10 flex sm:justify-normal justify-between sm:w-auto w-full">
             Reach me 👉 kdamla41@gmail.com
             <a className="ms-10 text-blue-600 custom-cursor" href="https://www.linkedin.com/in/damla-kara-348081232/">LinkedIn</a>
         </p> 

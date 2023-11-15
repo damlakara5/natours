@@ -37,7 +37,7 @@ body {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
   color: #777;
-  padding: 3rem;
+  padding: 0rem;
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -324,7 +324,6 @@ body {
 
 
 .header-auth{
-  height: 3rem;
   position: relative;
   z-index: 100;
   display: -webkit-box;
@@ -335,7 +334,6 @@ body {
   justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
 }
 
 .header__logo img {
@@ -888,6 +886,15 @@ body {
   -ms-flex-pack: end;
   justify-content: flex-end;
 }
+
+
+@media only screen and (max-width: 37.5em) {
+  .nav--user {
+    justify-content: unset;
+    flex: unset;
+  }
+}
+
 .nav__el,
 .nav__el:link,
 .nav__el:visited {
@@ -919,9 +926,10 @@ body {
 .nav__el:not(:last-child) {
   margin-right: 3rem;
 }
+
 @media only screen and (max-width: 37.5em) {
   .nav__el:not(:last-child) {
-    margin-right: 0;
+    margin-right: 1rem;
   }
 }
 
@@ -935,6 +943,13 @@ body {
   border: 1px solid currentColor !important;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+@media only screen and (max-width: 62.5em) {
+  .nav__el--cta {
+    padding: 0.5rem 1rem;
+    
+  }
 }
 .nav__el--cta:hover {
   background-color: #f7f7f7;
@@ -1044,12 +1059,6 @@ body {
 .side-nav a:active {
   -webkit-transform: translateX(3px);
   transform: translateX(3px);
-}
-.side-nav svg {
-  height: 1.9rem;
-  width: 1.9rem;
-  fill: #f7f7f7;
-  margin-right: 2rem;
 }
 
 .admin-nav {
@@ -1351,3 +1360,4 @@ body {
   cursor: url("./assets/linkedIn-icon.png"), pointer;
 
 }
+

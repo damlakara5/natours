@@ -22,7 +22,7 @@ function MyReviews() {
             {
                 reviews.data.data.length === 0 && <div className="text-3xl mt-32">You haven't commented on any tours yet. You can comment on the tours you booked.</div>
             }
-            <div className="flex-1 grid grid-cols-2 gap-10 mx-6 my-5">
+            <div className="flex-1 grid sm:grid-cols-2 gap-10 mx-6 my-5">
                 {
                     reviews?.data.data.map((review,i) => <UserReviewCard  key={i} review={review} />)
                 }
