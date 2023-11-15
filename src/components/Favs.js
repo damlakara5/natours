@@ -8,7 +8,7 @@ function Favs() {
 
     if(favIsLoading) return <Loading />
 
-    if(favs.data.tours.length === 0) return <div className="text-4xl text-start mt-40">You don't have any favorite tours yet! ☹️ <br /> Check out our tours and add them to your favorites now!</div>
+    if(favs?.data.tours.length === 0) return <div className="text-4xl text-start mt-40">You don't have any favorite tours yet! ☹️ <br /> Check out our tours and add them to your favorites now!</div>
 
     const isFavorited = (tourId) => {
         return favs.data.tours.some(favorite => favorite.id === tourId);
@@ -16,7 +16,7 @@ function Favs() {
      
    
     return (
-        <div className='card-container grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16'>
+        <div className='card-container grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16 px-5'>
             {
                 favs && favs.data.tours.map(tour => 
                     <TourCard
