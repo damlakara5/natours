@@ -23,7 +23,6 @@ const createSendToken = (user,statusCode,req, res) => {
     secure: req.secure
   }
  
-  console.log(res)
   res.cookie('jwt', token, cookieOptions)
   //remove password from output
   user.password = undefined
@@ -67,6 +66,19 @@ exports.login = catchAsync(async (req, res, next) => {
     if (!user || !(await user.correctPassword(password, user.password))) {
       return next(new AppError('Incorrect email or password', 401));
     }
+
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+    // Update the login count
+    user.loginCount += 1;
+  
+    // Add the new IP address to the loginIPs array if it's not already there
+    if (!user.loginIPs.includes(ip)) {
+      user.loginIPs.push(ip);
+    }
+  
+    // Save the updates to the user
+    await user.save({ validateBeforeSave: false });
   
     // 3) If everything ok, send token to client
     createSendToken(user, 200, req,res)

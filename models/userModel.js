@@ -48,7 +48,12 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false // do net send this info to user
-    }
+    },
+    loginCount: {
+        type: Number,
+        default: 0,
+      },
+      loginIPs: [String], // Array to store login IPs
 })
 
 
