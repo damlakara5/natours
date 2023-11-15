@@ -20,7 +20,7 @@ export const useAuth = () => {
         onError: () => toast.error("Incorrect email or password")
 
     })
-    const { mutate:login} = useMutation({
+    const { mutate:login, isPending: isLoggedin} = useMutation({
         mutationFn: (reqData) => loginApi(reqData),
         mutationKey: ["login"],
         onSuccess: (data) => {
@@ -33,5 +33,5 @@ export const useAuth = () => {
 
     })
 
-    return {signup, login}
+    return {signup, login, isLoggedin}
 }

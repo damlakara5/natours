@@ -19,6 +19,7 @@ const Header = () => {
 
 
   return (
+    <>
     <header className="header md:px-12 ">
         <nav className="nav nav--tours">
             <a className="nav__el md:text-base text-sm" href="/">All Tours</a>
@@ -47,6 +48,14 @@ const Header = () => {
             }
         </nav>
     </header>
+    <header className="header-auth text-2xl ps-10" style={{backgroundColor: "#fef9c3"}} >
+         <p>  This website was developed by <span className="font-bold">Damla Kara</span> .</p>
+         <p className="pe-10">
+            Reach me 👉 kdamla41@gmail.com
+            <a className="ms-10 text-blue-600 custom-cursor" href="https://www.linkedin.com/in/damla-kara-348081232/">LinkedIn</a>
+        </p> 
+    </header>
+    </>
   )
 }
 

@@ -322,6 +322,22 @@ body {
   align-items: center;
 }
 
+
+.header-auth{
+  height: 3rem;
+  position: relative;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .header__logo img {
   height: 3.5rem;
 }
@@ -1327,3 +1343,11 @@ body {
 
 
 
+.custom-cursor{
+  cursor: url("./assets/linkedIn-icon.png"), pointer;
+}
+
+.custom-cursor:hover{
+  cursor: url("./assets/linkedIn-icon.png"), pointer;
+
+}

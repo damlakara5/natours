@@ -6,6 +6,7 @@ import Sidebar from './ui/Sidebar'
 import Main from './ui/Main'
 import GreenButton from './ui/GreenButton'
 import FormGroup from './ui/FormGroup'
+import { toast } from 'react-toastify'
 
 const User = () => {
     const {user, setUser} = useUser()
@@ -74,7 +75,13 @@ const User = () => {
             body: JSON.stringify(data)
         })
 
-        console.log(res)
+        
+    }
+
+
+
+    const handleInfo = () => {
+        toast.warning("Data mutations ( update, delete) are deactivated in this demo app")
     }
 
     if(!user) return <p>Please log in</p>
@@ -96,7 +103,7 @@ const User = () => {
                                 <label for="photo">Choose new photo</label>
                             </div>
                             <div class="form__group right">
-                                <GreenButton label="Save settings" />
+                                <GreenButton label="Save settings" handleClick={handleInfo} />
                             </div>
                         </form>
                     </div>
@@ -110,7 +117,7 @@ const User = () => {
                             <FormGroup  label="Confirm password" handleChange={setConfirmPassword} inputType="password" name="password" value={passwordConfirm} placeholder="••••••••" minLength="8"  />
 
                             <div class="form__group right">
-                                <GreenButton  label="Save password" />
+                                <GreenButton  label="Save password" handleClick={handleInfo} />
                             </div>
                         </form>
                     </div>
